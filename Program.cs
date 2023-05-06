@@ -1,7 +1,7 @@
 ﻿using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 
-namespace GravitySim
+namespace GravitationSim
 {
   public class Program
   {
@@ -10,9 +10,9 @@ namespace GravitySim
       using (MainWindow window = new MainWindow(
         GameWindowSettings.Default,
         new NativeWindowSettings() {
-          Size = (600, 450),
-          Location = (370, 300),
-          WindowBorder = WindowBorder.Resizable,
+          Size = (1000, 1000),
+          Location = (50, 50),
+          WindowBorder = WindowBorder.Fixed,
           WindowState = WindowState.Normal,
           Title = "Gravity Simulation",
           Flags = ContextFlags.Default,
