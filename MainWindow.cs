@@ -1,56 +1,51 @@
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
-using GravitySim.Shaders;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace GravitySim
 {
   public class MainWindow : GameWindow
   {
 
-    private int _vertexBufferObject;
-    private int _vertexArrayObject;
-
-    float[] vertices = {
-      -0.5f, -0.5f, 0.0f, //Bottom-left vertex
-      0.5f, -0.5f, 0.0f, //Bottom-right vertex
-      0.0f,  0.5f, 0.0f  //Top vertex
+    private float _frameTime = .0f;
+    private int _fps = 0;
+    float[] vertices = new float[] { 
+      -0.5f, -0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f,
+      -0.5f,  0.5f, 0.0f,
+        0.5f,  0.5f, 0.0f
     };
 
-    Shader _shader;
+    float[] colors = new float[] {
+      1.0f, 0.0f, 0.0f, 1.0f,
+      0.0f, 1.0f, 0.0f, 1.0f,
+      0.0f, 0.0f, 1.0f, 1.0f,
+      0.8f, 0.6f, 0.2f, 1.0f
+    };
+    int vaoId = 0;
+    int vboVertex = 0;
+    int vboColor = 0;
 
-    public MainWindow(int width, int height, string title)
-    : base(GameWindowSettings.Default, new NativeWindowSettings()
-      {
-        Size = (width, height),
-        Title = title
-      }
-    ) {}
+    public MainWindow(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
+      : base(gameWindowSettings, nativeWindowSettings) {}
 
     protected override void OnLoad()
     {
       base.OnLoad();
-      
-      GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
-      _vertexBufferObject = GL.GenBuffer();
-      GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
-      GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
-      
-      _vertexArrayObject = GL.GenVertexArray();
-      GL.BindVertexArray(_vertexArrayObject);
+      GL.ClearColor(0.1f, 0.0f, 0.0f, 1.0f);
 
-      
-      GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
-      GL.EnableVertexAttribArray(0);
+      GL.Enable(EnableCap.CullFace);
+      GL.CullFace(CullFaceMode.Back);
 
-      _shader = new Shader("Shaders/shader.vert", "Shaders/shader.frag");
-      _shader.Use();
+
+      vboVertex = CreateVBO(vertices);
+      vboColor = CreateVBO(colors);
+      vaoId = CreateVAOnoShaders(vertices, colors);
     }
-
-
 
     protected override void OnRenderFrame(FrameEventArgs args)
     {
@@ -58,42 +53,86 @@ namespace GravitySim
 
       GL.Clear(ClearBufferMask.ColorBufferBit);
 
-      _shader.Use();
-
-      GL.BindVertexArray(_vertexArrayObject);
-
-      GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
+      DrawVAOnoShaders();
 
       SwapBuffers();
     }
 
     protected override void OnUpdateFrame(FrameEventArgs args)
     {
+      _frameTime += (float) args.Time;
+      _fps++;
+      if (_frameTime >= 1.0f)
+      {
+        Title = $"Gravity simulation - {_fps}";
+        _frameTime = 0.0f;
+        _fps = 0;
+      }
+
+      var key = KeyboardState;
+
+      if (key.IsKeyDown(Keys.Escape))
+      {
+        Close();
+      }
+
       base.OnUpdateFrame(args);
+    }
+
+    private int CreateVBO(float[] data)
+    {
+      int vbo = GL.GenBuffer();
+      GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
+      GL.BufferData(BufferTarget.ArrayBuffer, data.Length * sizeof(float), data, BufferUsageHint.StaticDraw);
+      GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+      return vbo;
+    }
+
+    private int CreateVAOnoShaders(float[] vertices, float[] colors)
+    {
+      int vao = GL.GenVertexArray();
+      GL.BindVertexArray(vao);
+
+      GL.EnableClientState(ArrayCap.VertexArray);
+      GL.EnableClientState(ArrayCap.ColorArray);
+
+      GL.BindBuffer(BufferTarget.ArrayBuffer, vboVertex);
+      GL.VertexPointer(3, VertexPointerType.Float, 0, 0);
+
+      GL.BindBuffer(BufferTarget.ArrayBuffer, vboColor);
+      GL.ColorPointer(4, ColorPointerType.Float, 0, 0);
+
+      GL.BindVertexArray(0);
+      GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+      GL.DisableClientState(ArrayCap.VertexArray);
+      GL.DisableClientState(ArrayCap.ColorArray);
+      return vao;
+    }
+
+    private void DrawVAOnoShaders()
+    {
+      GL.BindVertexArray(vaoId);
+      GL.DrawArrays(PrimitiveType.TriangleStrip, 0, 4);
     }
 
     protected override void OnResize(ResizeEventArgs e)
     {
       base.OnResize(e);
-
-      GL.Viewport(0, 0, e.Width, e.Height);
     }
 
     protected override void OnUnload()
     {
-
-      GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-      GL.BindVertexArray(0);
-      GL.UseProgram(0);
-
-      GL.DeleteBuffer(_vertexBufferObject);
-      GL.DeleteVertexArray(_vertexArrayObject);
-
-      GL.DeleteProgram(_shader.handle);
-
-      _shader.Dispose();
+      DeleteVAOnoShaders();
 
       base.OnUnload();
+    }
+
+    private void DeleteVAOnoShaders()
+    {
+      GL.BindVertexArray(0);
+      GL.DeleteVertexArray(vaoId);
+      GL.DeleteBuffer(vboVertex);
+      GL.DeleteBuffer(vboColor);
     }
   }
 }
