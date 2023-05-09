@@ -1,5 +1,6 @@
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using Newtonsoft.Json;
 
 namespace GravitationSim
 {
@@ -9,35 +10,13 @@ namespace GravitationSim
     private List<CelestialObject> _celestialObjects;
 
     public Scene() {
-      _celestialObjects = new List<CelestialObject>();
-      _celestialObjects.Add(new CelestialObject() {
-        Name = "Sun",
-        Type = "Star",
-        Mass = 1.98E+30,
-        Radius = 696342,
-        X = 0.0,
-        Y = 0.0,
-        Color = (0.7f, 0.5f, 0.0f, 1.0f)
-        });
-      _celestialObjects.Add(new CelestialObject() {
-        Name = "Earth",
-        Type = "Planet",
-        Mass = 5.97E+24,
-        Radius = 6378 * 5, //artificial x5
-        X = 1.496E+11,
-        Y = 0,
-        Color = (0.3f, 1.0f, 0.5f, 1.0f),
-        Velocity = (0, 100)
-        });
-      _celestialObjects.Add(new CelestialObject() {
-        Name = "Moon",
-        Type = "Moon",
-        Mass = 7.36E+22,
-        Radius = 1738,
-        X = 1.496E+11,
-        Y = 3.84400E+8,
-        Color = (0.9f, 0.9f, 0.9f, 1.0f)
-        });
+      string jsonString = File.ReadAllText("Objects.json");
+      _celestialObjects = JsonConvert.DeserializeObject<List<CelestialObject>>(jsonString);
+      if (_celestialObjects is null)
+      {
+        Console.WriteLine("Objects.json not provided.");
+        _celestialObjects = new List<CelestialObject>();
+      }
     }
 
     public void Draw()
@@ -79,8 +58,8 @@ namespace GravitationSim
     {
       float x, y;
       GL.Color4(obj.Color);
-      (float, float) center = obj.AsNormalizedXY();
-      float radius = obj.AsNormalizedRadius();
+      (float, float) center = obj.ScaledXY();
+      float radius = obj.ScaledRadius();
       float a = (float)Math.PI * 2/100;
       GL.Begin(PrimitiveType.TriangleFan);
       GL.Vertex2(center.Item1, center.Item2);

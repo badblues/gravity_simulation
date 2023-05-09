@@ -37,8 +37,7 @@ namespace GravitationSim
 
       GL.Clear(ClearBufferMask.ColorBufferBit);
 
-      //TODO where to put it
-      _scene.UpdatePositions(100000);
+      _scene.UpdatePositions(1000000);
 
       GL.Viewport(0, 0, this.Size.X, this.Size.Y);
 
