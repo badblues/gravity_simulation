@@ -1,5 +1,4 @@
-using OpenTK;
-using OpenTK.Graphics;
+
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -12,9 +11,10 @@ namespace GravitationSim
   {
 
     private float _frameTime = .0f;
-    private float _cameraDistance = 1.0f;
+    private float _cameraDistance = 10.0f;
     private float _cameraPositionX = 0.0f;
     private float _cameraPositionY = 0.0f;
+    private double _simulationSpeed = 1;
     private int _fps = 0;
     private Scene _scene;
 
@@ -37,7 +37,7 @@ namespace GravitationSim
 
       GL.Clear(ClearBufferMask.ColorBufferBit);
 
-      _scene.UpdatePositions(1000000);
+      _scene.UpdatePositions(_simulationSpeed);
 
       GL.Viewport(0, 0, this.Size.X, this.Size.Y);
 
@@ -56,7 +56,7 @@ namespace GravitationSim
       GL.MatrixMode(MatrixMode.Modelview);
       GL.LoadMatrix(ref modelview);
 
-      _scene.Draw();
+      _scene.DrawAll();
 
       SwapBuffers();
     }
@@ -74,11 +74,22 @@ namespace GravitationSim
 
       var key = KeyboardState;
       var mouse = MouseState;
-
-      if (key.IsKeyDown(Keys.Escape))
+      
+      if (key.IsKeyPressed(Keys.Escape))
       {
         Close();
       }
+      else if (key.IsKeyPressed(Keys.Up))
+      {
+        _simulationSpeed *= 2;
+      }
+      else if (key.IsKeyPressed(Keys.Down))
+      {
+        _simulationSpeed /= 2;
+        if (_simulationSpeed < 1)
+          _simulationSpeed = 1;
+      }
+
 
       if (mouse.IsButtonDown(MouseButton.Left))
       {
@@ -87,7 +98,7 @@ namespace GravitationSim
           Console.WriteLine($"X = {_cameraPositionX}, Y = {_cameraPositionY}");
       }
 
-      _cameraDistance -= mouse.ScrollDelta.Y * 0.1f;
+      _cameraDistance -= mouse.ScrollDelta.Y * 1f;
       if (_cameraDistance < 0.1)
       {
         _cameraDistance = 0.1f;

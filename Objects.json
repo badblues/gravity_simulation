@@ -3,12 +3,12 @@
     "Name": "Sun",
     "Type": "Star",
     "Mass": 1.98E+30,
-    "Radius": 696342,
+    "Radius": 6.957E+7,
     "X": 0.0,
     "Y": 0.0,
     "Color": {
-      "Item1": 0.7,
-      "Item2": 0.5,
+      "Item1": 1.0,
+      "Item2": 1.0,
       "Item3": 0.0,
       "Item4": 1.0
     }
@@ -17,8 +17,8 @@
     "Name": "Earth",
     "Type": "Planet",
     "Mass": 5.97E+24,
-    "Radius": 6378E+1,
-    "X": 1.496E+11,
+    "Radius": 6.378E+6,
+    "X": 1.51E+11,
     "Y": 0,
     "Color": {
       "Item1": 0.3,
@@ -28,16 +28,16 @@
     },
     "Velocity": {
       "Item1": 0,
-      "Item2": 29.78
+      "Item2": 29.78E+3
     }
   },
   {
     "Name": "Moon",
     "Type": "Moon",
     "Mass": 7.36E+22,
-    "Radius": 1738E+1,
-    "X": 1.496E+11,
-    "Y": 3.84400E+8,
+    "Radius": 1.737E6,
+    "X": 1.51E+11,
+    "Y": 3.84400E8,
     "Color": {
       "Item1": 0.9,
       "Item2": 0.9,
@@ -46,43 +46,43 @@
     },
     "Velocity": {
       "Item1": 0,
-      "Item2": 2.38
+      "Item2":1.023E6
     }
   },
   {
     "Name": "Mercury",
     "Type": "Planet",
-    "Mass": 3.33E+23,
-    "Radius": 2439E+1,
-    "X": 0.69168E+11,
+    "Mass": 3.3E+23,
+    "Radius": 2.439E+6,
+    "X": 5.79E+10,
     "Y": 0,
     "Color": {
-      "Item1": 0.8,
-      "Item2": 0.8,
-      "Item3": 0.8,
+      "Item1": 0.7,
+      "Item2": 0.7,
+      "Item3": 0.7,
       "Item4": 1.0
     },
     "Velocity": {
       "Item1": 0,
-      "Item2": 4.25
+      "Item2": 47.87E+3
     }
   },
   {
     "Name": "Venus",
     "Type": "Planet",
     "Mass": 4.87E+24,
-    "Radius": 6051E+1,
-    "X": 1.0767E+11,
+    "Radius": 6.0518E+6,
+    "X": 1.08E+11,
     "Y": 0,
     "Color": {
-      "Item1": 0.8,
-      "Item2": 0.4,
-      "Item3": 0.4,
+      "Item1": 0.9,
+      "Item2": 0.5,
+      "Item3": 0.1,
       "Item4": 1.0
     },
     "Velocity": {
       "Item1": 0,
-      "Item2": 10.364
+      "Item2": 35.02E+3
     }
   }
 ]
