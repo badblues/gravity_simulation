@@ -18,6 +18,7 @@ namespace GravitationSim
         if (readCelestialObjects is not null)
           foreach (CelestialObject celestialObject in readCelestialObjects)
           {
+            Console.WriteLine($"Loaded object: {celestialObject.Name}");
             _celestialObjects.Add(new CelestialObjectWrapper(celestialObject));
           }
       }

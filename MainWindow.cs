@@ -22,6 +22,7 @@ namespace GravitationSim
       : base(gameWindowSettings, nativeWindowSettings)
       {
         _scene = new Scene();
+        PrintControlsInfo();
       }
 
     protected override void OnLoad()
@@ -101,11 +102,15 @@ namespace GravitationSim
           _cameraPositionY += mouse.Delta.Y * 0.0005f * _cameraDistance;
       }
 
-      _cameraDistance -= mouse.ScrollDelta.Y * 1f;
-      if (_cameraDistance < 0.1)
+      if (mouse.ScrollDelta.Y != 0)
       {
-        _cameraDistance = 0.1f;
+        _cameraDistance -= mouse.ScrollDelta.Y * 1f;
+        if (_cameraDistance < 0.1)
+        {
+          _cameraDistance = 0.1f;
+        }
       }
+
 
       base.OnUpdateFrame(args);
     }
@@ -113,6 +118,16 @@ namespace GravitationSim
     protected override void OnResize(ResizeEventArgs e)
     {
       base.OnResize(e);
+    }
+
+    private void PrintControlsInfo()
+    {
+      Console.WriteLine("\t==== Control buttons ====\n" +
+                        "\tEscape - Close\n" +
+                        "\tSpace - Show/hide trails\n" +
+                        "\tArrows Up/Down - Increase/decrease simulation speed\n" +
+                        "\tScroll wheel - Zoom in/out\n" +
+                        "\tLeft mouse button - Move\n");
     }
   }
 }

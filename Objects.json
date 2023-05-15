@@ -94,5 +94,126 @@
       "Item1": 0,
       "Item2": 35.02E+3
     }
+  },
+  {
+    "Name": "Mars",
+    "Type": "Planet",
+    "Mass": 6.39E+23,
+    "Radius": 3.3895E+6,
+    "Coordinates": {
+      "Item1": 2.28E+11,
+      "Item2": 0
+    },
+    "Color": {
+      "Item1": 1.0,
+      "Item2": 0.5,
+      "Item3": 0.5,
+      "Item4": 1.0
+    },
+    "Velocity": {
+      "Item1": 0,
+      "Item2": 24.077E+3
+    }
+  },
+  {
+    "Name": "Jupiter",
+    "Type": "Planet",
+    "Mass": 1.898E+27,
+    "Radius": 69.911E+6,
+    "Coordinates": {
+      "Item1": 7.78E+11,
+      "Item2": 0
+    },
+    "Color": {
+      "Item1": 0.7,
+      "Item2": 0.5,
+      "Item3": 0.3,
+      "Item4": 1.0
+    },
+    "Velocity": {
+      "Item1": 0,
+      "Item2": 13.07E+3
+    }
+  },
+  {
+    "Name": "Saturn",
+    "Type": "Planet",
+    "Mass": 5.68E+26,
+    "Radius": 58.232E+6,
+    "Coordinates": {
+      "Item1": 1.43E+12,
+      "Item2": 0
+    },
+    "Color": {
+      "Item1": 1.0,
+      "Item2": 0.7,
+      "Item3": 0.5,
+      "Item4": 1.0
+    },
+    "Velocity": {
+      "Item1": 0,
+      "Item2": 9.69E+3
+    }
+  },
+  {
+    "Name": "Uranus",
+    "Type": "Planet",
+    "Mass": 8.68E+25,
+    "Radius": 25.362E+6,
+    "Coordinates": {
+      "Item1": 2.87E+12,
+      "Item2": 0
+    },
+    "Color": {
+      "Item1": 0.5,
+      "Item2": 0.7,
+      "Item3": 1.0,
+      "Item4": 1.0
+    },
+    "Velocity": {
+      "Item1": 0,
+      "Item2": 6.80E+3
+    }
+  },
+  
+  {
+    "Name": "Neptune",
+    "Type": "Planet",
+    "Mass": 1.02E+26,
+    "Radius": 24.622E+6,
+    "Coordinates": {
+      "Item1": 4.50E+12,
+      "Item2": 0
+    },
+    "Color": {
+      "Item1": 0.2,
+      "Item2": 0.2,
+      "Item3": 1.0,
+      "Item4": 1.0
+    },
+    "Velocity": {
+      "Item1": 0,
+      "Item2": 5.43E+3
+    }
+  },
+  {
+    "Name": "Pluto",
+    "Type": "Dwarf Planet",
+    "Mass": 1.31E+22,
+    "Radius": 1.188E+6,
+    "Coordinates": {
+      "Item1": 5.91E+12,
+      "Item2": 0
+    },
+    "Color": {
+      "Item1": 0.8,
+      "Item2": 0.8,
+      "Item3": 0.8,
+      "Item4": 1.0
+    },
+    "Velocity": {
+      "Item1": 0,
+      "Item2": 4.67E+3
+    }
   }
 ]
