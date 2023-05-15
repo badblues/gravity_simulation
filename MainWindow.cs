@@ -89,13 +89,16 @@ namespace GravitationSim
         if (_simulationSpeed < 1)
           _simulationSpeed = 1;
       }
+      else if (key.IsKeyPressed(Keys.Space))
+      {
+        _scene.DrawTrail = !_scene.DrawTrail;
+      }
 
 
       if (mouse.IsButtonDown(MouseButton.Left))
       {
           _cameraPositionX -= mouse.Delta.X * 0.0005f * _cameraDistance;
           _cameraPositionY += mouse.Delta.Y * 0.0005f * _cameraDistance;
-          Console.WriteLine($"X = {_cameraPositionX}, Y = {_cameraPositionY}");
       }
 
       _cameraDistance -= mouse.ScrollDelta.Y * 1f;
@@ -111,6 +114,5 @@ namespace GravitationSim
     {
       base.OnResize(e);
     }
-
   }
 }

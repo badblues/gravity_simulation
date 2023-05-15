@@ -8,7 +8,7 @@ namespace GravitationSim
     {
       float x, y;
       GL.Color4(obj.Color);
-      (float, float) center = obj.ScaledXY();
+      (float, float) center = obj.Coordinates.ScaledXY();
       float radius = obj.ScaledRadius();
       float a = (float)Math.PI * 2/100;
       GL.Begin(PrimitiveType.TriangleFan);
@@ -21,13 +21,14 @@ namespace GravitationSim
       }
       GL.End();
     }
-    public void DrawTrail((float, float)[] points)
+    public void DrawTrail(List<(double, double)> points)
     {
+      GL.Color4(1.0, 1.0, 1.0, 1.0);
       GL.Begin(PrimitiveType.Points);
-      foreach((float, float) point in points)
+      foreach((double, double) point in points)
       {
-        GL.Vertex2(point.Item1, point.Item2);
-        GL.Color4(1, 1, 1, 1);
+        (float, float) xy = point.ScaledXY();
+        GL.Vertex2(xy.Item1, xy.Item2);
       }
       GL.End();
     }

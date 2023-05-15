@@ -4,8 +4,10 @@
     "Type": "Star",
     "Mass": 1.98E+30,
     "Radius": 6.957E+7,
-    "X": 0.0,
-    "Y": 0.0,
+    "Coordinates": {
+      "Item1": 0,
+      "Item2": 0
+    },
     "Color": {
       "Item1": 1.0,
       "Item2": 1.0,
@@ -18,8 +20,10 @@
     "Type": "Planet",
     "Mass": 5.97E+24,
     "Radius": 6.378E+6,
-    "X": 1.51E+11,
-    "Y": 0,
+    "Coordinates": {
+      "Item1": 1.51E+11,
+      "Item2": 0
+    },
     "Color": {
       "Item1": 0.3,
       "Item2": 1.0,
@@ -36,8 +40,10 @@
     "Type": "Moon",
     "Mass": 7.36E+22,
     "Radius": 1.737E6,
-    "X": 1.51E+11,
-    "Y": 3.84400E8,
+    "Coordinates": {
+      "Item1": 1.51E+11,
+      "Item2": 3.84400E8
+    },
     "Color": {
       "Item1": 0.9,
       "Item2": 0.9,
@@ -54,8 +60,10 @@
     "Type": "Planet",
     "Mass": 3.3E+23,
     "Radius": 2.439E+6,
-    "X": 5.79E+10,
-    "Y": 0,
+    "Coordinates": {
+      "Item1": 5.79E+10,
+      "Item2": 0
+    },
     "Color": {
       "Item1": 0.7,
       "Item2": 0.7,
@@ -72,8 +80,10 @@
     "Type": "Planet",
     "Mass": 4.87E+24,
     "Radius": 6.0518E+6,
-    "X": 1.08E+11,
-    "Y": 0,
+    "Coordinates": {
+      "Item1": 1.08E+11,
+      "Item2": 0
+    },
     "Color": {
       "Item1": 0.9,
       "Item2": 0.5,
